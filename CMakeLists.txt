@@ -50,9 +50,6 @@ set(CORE_SOURCES
 set(TUI_SOURCES
     src/tui/app.cpp
     src/tui/tree_view.cpp
-    src/tui/file_view.cpp
-    src/tui/commit_dialog.cpp
-    src/tui/status_bar.cpp
 )
 
 set(UTILS_SOURCES
