@@ -1,0 +1,23 @@
+# Build directories
+build/
+build_release/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Mini-Git internal data (runtime generated)
+.minigit/
+
+# Demo folder (test data)
+demo/
+
+# Internal dev notes
+DEVPLAN.md
