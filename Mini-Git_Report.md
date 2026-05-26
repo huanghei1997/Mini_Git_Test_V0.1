@@ -157,3 +157,4 @@ Complete source code (21 files, ~2,022 lines) is available in:
 - **nlohmann/json** (v3.11.3) — JSON for Modern C++. https://github.com/nlohmann/json
 - **C++17 `<filesystem>`** — Standard library for cross-platform file operations. https://en.cppreference.com/w/cpp/filesystem
 - **CMake FetchContent** — Automatic dependency management. https://cmake.org/cmake/help/latest/module/FetchContent.html
+- **Claude** (Anthropic) — AI assistant used for code review, debugging, and documentation. https://www.anthropic.com/claude

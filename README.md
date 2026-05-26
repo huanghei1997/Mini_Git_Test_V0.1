@@ -115,6 +115,8 @@ H2/
   https://en.cppreference.com/w/cpp/filesystem
 - **CMake FetchContent** — Used to automatically download and build third-party dependencies at configure time.
   https://cmake.org/cmake/help/latest/module/FetchContent.html
+- **Claude** (Anthropic) — AI assistant used for code review, debugging, and documentation.
+  https://www.anthropic.com/claude
 
 ## License
 
