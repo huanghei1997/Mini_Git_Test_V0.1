@@ -46,12 +46,6 @@ cmake --build .
 
 The program automatically creates/loads a `.minigit/` repository in the current directory.
 
-### Run Tests
-
-```bash
-./mini-git --test
-```
-
 ## Keyboard Shortcuts
 
 | Key | Action | Context |
@@ -95,7 +89,7 @@ H2/
 │       ├── path_utils.h      # Path normalization/encoding
 │       └── time_utils.h      # Timestamp utilities
 ├── src/
-│   ├── main.cpp              # Entry point + integration tests
+│   ├── main.cpp              # Entry point
 │   ├── core/                 # Backend implementation
 │   └── tui/                  # TUI implementation
 └── .gitignore
@@ -110,6 +104,17 @@ H2/
 | Data format | JSON (nlohmann/json) | Human-readable, easy to debug |
 | UI framework | FTXUI | Cross-platform terminal UI, no external dependencies |
 | Path handling | `std::filesystem` | C++17 standard, cross-platform |
+
+## References
+
+- **FTXUI** (v5.0.0) — Terminal UI library for C++. Used for building the full-screen interactive interface.
+  https://github.com/ArthurSonzogni/FTXUI
+- **nlohmann/json** (v3.11.3) — JSON for Modern C++. Used for serializing/deserializing all persistent data (config, tracked files, commit metadata).
+  https://github.com/nlohmann/json
+- **C++17 `<filesystem>`** — Standard library module for cross-platform file and directory operations.
+  https://en.cppreference.com/w/cpp/filesystem
+- **CMake FetchContent** — Used to automatically download and build third-party dependencies at configure time.
+  https://cmake.org/cmake/help/latest/module/FetchContent.html
 
 ## License
 

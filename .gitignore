@@ -21,3 +21,7 @@ demo/
 
 # Internal dev notes
 DEVPLAN.md
+
+# Generated/utility files
+all_source.cpp
+gen_pdf.py
