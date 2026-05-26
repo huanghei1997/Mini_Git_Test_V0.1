@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // Mini-Git -- Complete Source Code Archive
 // https://github.com/huanghei1997/Mini_Git_Test_V0.1
 // This file is for code reading only, not compilable.
@@ -55,7 +55,6 @@ struct Repository {
 
 #endif // MINIGIT_CORE_REPOSITORY_H
 
-
 // ============================================================
 // FILE 2 : include\core\file_tracker.h
 // ============================================================
@@ -108,7 +107,6 @@ struct FileTracker {
 
 #endif // MINIGIT_CORE_FILE_TRACKER_H
 
-
 // ============================================================
 // FILE 3 : include\core\commit.h
 // ============================================================
@@ -152,7 +150,6 @@ struct CommitNode {
 
 #endif // MINIGIT_CORE_COMMIT_H
 
-
 // ============================================================
 // FILE 4 : include\core\branch.h
 // ============================================================
@@ -188,7 +185,6 @@ struct BranchManager {
 } // namespace minigit
 
 #endif // MINIGIT_CORE_BRANCH_H
-
 
 // ============================================================
 // FILE 5 : include\core\save.h
@@ -227,7 +223,6 @@ struct SaveManager {
 
 #endif // MINIGIT_CORE_SAVE_H
 
-
 // ============================================================
 // FILE 6 : include\core\snapshot.h
 // ============================================================
@@ -259,7 +254,6 @@ struct Snapshot {
 
 #endif // MINIGIT_CORE_SNAPSHOT_H
 
-
 // ============================================================
 // FILE 7 : include\tui\app.h
 // ============================================================
@@ -276,7 +270,6 @@ int run_app(const std::filesystem::path& repo_path);
 } // namespace minigit
 
 #endif // MINIGIT_TUI_APP_H
-
 
 // ============================================================
 // FILE 8 : include\tui\tree_view.h
@@ -325,7 +318,6 @@ struct TreeData {
 
 #endif // MINIGIT_TUI_TREE_VIEW_H
 
-
 // ============================================================
 // FILE 9 : include\utils\path_utils.h
 // ============================================================
@@ -354,7 +346,6 @@ std::filesystem::path find_minigit_root(const std::filesystem::path& working_dir
 
 #endif // MINIGIT_UTILS_PATH_UTILS_H
 
-
 // ============================================================
 // FILE 10 : include\utils\time_utils.h
 // ============================================================
@@ -372,7 +363,6 @@ std::string current_timestamp();
 
 #endif // MINIGIT_UTILS_TIME_UTILS_H
 
-
 // ============================================================
 // FILE 11 : src\main.cpp
 // ============================================================
@@ -384,7 +374,6 @@ int main() {
     std::filesystem::path repo_path = std::filesystem::current_path();
     return minigit::run_app(repo_path);
 }
-
 
 // ============================================================
 // FILE 12 : src\core\repository.cpp
@@ -401,7 +390,7 @@ namespace minigit {
 namespace fs = std::filesystem;
 using json = nlohmann::json;
 
-// 鈹€鈹€ Path helpers 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Path helpers ──────────────────────────────────────────────
 
 fs::path Repository::minigit_dir() const {
     return root_path / ".minigit";
@@ -423,7 +412,7 @@ fs::path Repository::config_path() const {
     return minigit_dir() / "config";
 }
 
-// 鈹€鈹€ init 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── init ──────────────────────────────────────────────────────
 
 bool Repository::init(const fs::path& path) {
     fs::path abs_path = fs::absolute(path);
@@ -468,7 +457,7 @@ bool Repository::init(const fs::path& path) {
     }
 }
 
-// 鈹€鈹€ load 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── load ──────────────────────────────────────────────────────
 
 bool Repository::load(const fs::path& path, Repository& repo) {
     fs::path root = find_minigit_root(path);
@@ -482,7 +471,7 @@ bool Repository::load(const fs::path& path, Repository& repo) {
     return repo.load_config();
 }
 
-// 鈹€鈹€ save_config 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── save_config ───────────────────────────────────────────────
 
 bool Repository::save_config() const {
     try {
@@ -500,7 +489,7 @@ bool Repository::save_config() const {
     }
 }
 
-// 鈹€鈹€ load_config 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── load_config ───────────────────────────────────────────────
 
 bool Repository::load_config() {
     try {
@@ -523,7 +512,6 @@ bool Repository::load_config() {
 
 } // namespace minigit
 
-
 // ============================================================
 // FILE 13 : src\core\file_tracker.cpp
 // ============================================================
@@ -541,7 +529,7 @@ namespace minigit {
 namespace fs = std::filesystem;
 using json = nlohmann::json;
 
-// 鈹€鈹€ Helpers 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Helpers ───────────────────────────────────────────────────
 
 std::string status_to_string(FileStatus s) {
     switch (s) {
@@ -559,7 +547,7 @@ static fs::path latest_commit_dir(const Repository& repo) {
     fs::path commits_dir = repo.branch_dir(repo.current_branch) / "commits";
     if (!fs::exists(commits_dir)) return {};
 
-    // Commit dirs are named 001, 002, ... 鈥?find the highest
+    // Commit dirs are named 001, 002, ... — find the highest
     std::string max_id;
     for (auto& entry : fs::directory_iterator(commits_dir)) {
         if (entry.is_directory()) {
@@ -571,7 +559,7 @@ static fs::path latest_commit_dir(const Repository& repo) {
     return commits_dir / max_id;
 }
 
-// 鈹€鈹€ list / save_list 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── list / save_list ──────────────────────────────────────────
 
 std::vector<fs::path> FileTracker::list(const Repository& repo) {
     std::vector<fs::path> result;
@@ -605,7 +593,7 @@ bool FileTracker::save_list(const Repository& repo,
     }
 }
 
-// 鈹€鈹€ track 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── track ─────────────────────────────────────────────────────
 
 bool FileTracker::track(Repository& repo, const fs::path& file) {
     fs::path abs_file = fs::absolute(file);
@@ -636,7 +624,7 @@ bool FileTracker::track(Repository& repo, const fs::path& file) {
     return true;
 }
 
-// 鈹€鈹€ untrack 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── untrack ───────────────────────────────────────────────────
 
 bool FileTracker::untrack(Repository& repo, const fs::path& file) {
     fs::path abs_file = fs::absolute(file);
@@ -658,7 +646,7 @@ bool FileTracker::untrack(Repository& repo, const fs::path& file) {
     return true;
 }
 
-// 鈹€鈹€ get_status (single file) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── get_status (single file) ──────────────────────────────────
 
 FileStatus FileTracker::get_status(const Repository& repo,
                                    const fs::path& file) {
@@ -672,25 +660,25 @@ FileStatus FileTracker::get_status(const Repository& repo,
     // Find the latest commit's snapshot
     fs::path commit_dir = latest_commit_dir(repo);
     if (commit_dir.empty()) {
-        // No commits yet 鈥?every tracked file is "new"
+        // No commits yet — every tracked file is "new"
         return FileStatus::New;
     }
 
     // Look for this file's snapshot in the commit
     fs::path snapshot_file = commit_dir / "files" / encode_path(abs_file);
     if (!fs::exists(snapshot_file)) {
-        // File wasn't in the last commit 鈥?it's new
+        // File wasn't in the last commit — it's new
         return FileStatus::New;
     }
 
-    // Compare file sizes 鈥?if different, it's modified
+    // Compare file sizes — if different, it's modified
     auto current_size = fs::file_size(abs_file);
     auto snapshot_size = fs::file_size(snapshot_file);
     if (current_size != snapshot_size) {
         return FileStatus::Modified;
     }
 
-    // Compare last-write times 鈥?if current is newer, it's modified
+    // Compare last-write times — if current is newer, it's modified
     auto current_time = fs::last_write_time(abs_file);
     auto snapshot_time = fs::last_write_time(snapshot_file);
     if (current_time != snapshot_time) {
@@ -700,7 +688,7 @@ FileStatus FileTracker::get_status(const Repository& repo,
     return FileStatus::Clean;
 }
 
-// 鈹€鈹€ get_all_status 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── get_all_status ────────────────────────────────────────────
 
 std::map<fs::path, FileStatus>
 FileTracker::get_all_status(const Repository& repo) {
@@ -713,7 +701,6 @@ FileTracker::get_all_status(const Repository& repo) {
 }
 
 } // namespace minigit
-
 
 // ============================================================
 // FILE 14 : src\core\commit.cpp
@@ -736,7 +723,7 @@ namespace minigit {
 namespace fs = std::filesystem;
 using json = nlohmann::json;
 
-// 鈹€鈹€ next_id 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── next_id ───────────────────────────────────────────────────
 
 std::string CommitNode::next_id(const Repository& repo) {
     fs::path commits_dir = repo.branch_dir(repo.current_branch) / "commits";
@@ -757,7 +744,7 @@ std::string CommitNode::next_id(const Repository& repo) {
     return oss.str();
 }
 
-// 鈹€鈹€ head_id 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── head_id ───────────────────────────────────────────────────
 
 std::string CommitNode::head_id(const Repository& repo) {
     fs::path commits_dir = repo.branch_dir(repo.current_branch) / "commits";
@@ -773,7 +760,7 @@ std::string CommitNode::head_id(const Repository& repo) {
     return max_id;
 }
 
-// 鈹€鈹€ create 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── create ────────────────────────────────────────────────────
 
 bool CommitNode::create(Repository& repo, const std::string& message) {
     // Get tracked files
@@ -825,7 +812,7 @@ bool CommitNode::create(Repository& repo, const std::string& message) {
     return true;
 }
 
-// 鈹€鈹€ load 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── load ──────────────────────────────────────────────────────
 
 bool CommitNode::load(const fs::path& commit_dir, CommitNode& node) {
     fs::path meta_path = commit_dir / "meta.json";
@@ -853,7 +840,7 @@ bool CommitNode::load(const fs::path& commit_dir, CommitNode& node) {
     }
 }
 
-// 鈹€鈹€ checkout 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── checkout ──────────────────────────────────────────────────
 
 bool CommitNode::checkout(const Repository& repo, const std::string& commit_id) {
     fs::path commit_dir = repo.branch_dir(repo.current_branch)
@@ -878,7 +865,6 @@ bool CommitNode::checkout(const Repository& repo, const std::string& commit_id) 
 
 } // namespace minigit
 
-
 // ============================================================
 // FILE 15 : src\core\branch.cpp
 // ============================================================
@@ -895,7 +881,7 @@ namespace minigit {
 
 namespace fs = std::filesystem;
 
-// 鈹€鈹€ list 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── list ──────────────────────────────────────────────────────
 
 std::vector<std::string> BranchManager::list(const Repository& repo) {
     std::vector<std::string> names;
@@ -911,7 +897,7 @@ std::vector<std::string> BranchManager::list(const Repository& repo) {
     return names;
 }
 
-// 鈹€鈹€ create 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── create ────────────────────────────────────────────────────
 
 bool BranchManager::create(Repository& repo,
                            const std::string& branch_name,
@@ -973,7 +959,7 @@ bool BranchManager::create(Repository& repo,
     }
 }
 
-// 鈹€鈹€ switch_to 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── switch_to ─────────────────────────────────────────────────
 
 bool BranchManager::switch_to(Repository& repo, const std::string& branch_name) {
     fs::path target_dir = repo.branches_dir() / branch_name;
@@ -1000,7 +986,7 @@ bool BranchManager::switch_to(Repository& repo, const std::string& branch_name) 
     return true;
 }
 
-// 鈹€鈹€ remove 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── remove ────────────────────────────────────────────────────
 
 bool BranchManager::remove(Repository& repo, const std::string& branch_name) {
     if (branch_name.empty()) {
@@ -1030,7 +1016,6 @@ bool BranchManager::remove(Repository& repo, const std::string& branch_name) {
 
 } // namespace minigit
 
-
 // ============================================================
 // FILE 16 : src\core\save.cpp
 // ============================================================
@@ -1051,19 +1036,19 @@ namespace minigit {
 namespace fs = std::filesystem;
 using json = nlohmann::json;
 
-// 鈹€鈹€ save_dir 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── save_dir ──────────────────────────────────────────────────
 
 fs::path SaveManager::save_dir(const Repository& repo) {
     return repo.branch_dir(repo.current_branch) / "save";
 }
 
-// 鈹€鈹€ exists 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── exists ────────────────────────────────────────────────────
 
 bool SaveManager::exists(const Repository& repo) {
     return fs::exists(save_dir(repo) / "meta.json");
 }
 
-// 鈹€鈹€ create (2.1) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── create (2.1) ──────────────────────────────────────────────
 
 bool SaveManager::create(Repository& repo) {
     auto tracked = FileTracker::list(repo);
@@ -1108,7 +1093,7 @@ bool SaveManager::create(Repository& repo) {
     return true;
 }
 
-// 鈹€鈹€ restore (2.2) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── restore (2.2) ─────────────────────────────────────────────
 
 bool SaveManager::restore(const Repository& repo) {
     fs::path dir = save_dir(repo);
@@ -1139,7 +1124,7 @@ bool SaveManager::restore(const Repository& repo) {
     }
 }
 
-// 鈹€鈹€ promote (2.3) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── promote (2.3) ─────────────────────────────────────────────
 
 bool SaveManager::promote(Repository& repo, const std::string& message) {
     fs::path dir = save_dir(repo);
@@ -1162,7 +1147,6 @@ bool SaveManager::promote(Repository& repo, const std::string& message) {
 }
 
 } // namespace minigit
-
 
 // ============================================================
 // FILE 17 : src\core\snapshot.cpp
@@ -1239,7 +1223,6 @@ bool Snapshot::restore(const fs::path& snapshot_dir,
 
 } // namespace minigit
 
-
 // ============================================================
 // FILE 18 : src\tui\app.cpp
 // ============================================================
@@ -1266,7 +1249,7 @@ namespace minigit {
 namespace fs = std::filesystem;
 using namespace ftxui;
 
-// 鈹€鈹€ App State 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── App State ─────────────────────────────────────────────────
 
 enum class ViewMode { Main, Files, FileBrowser, CommitDialog, BranchCreate, Tree, Help };
 
@@ -1286,7 +1269,7 @@ struct AppState {
     TreeData tree;
 };
 
-// 鈹€鈹€ Status Bar (3.2) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Status Bar (3.2) ──────────────────────────────────────────
 
 static Element render_status_bar(const AppState& state) {
     auto tracked = FileTracker::list(state.repo);
@@ -1306,7 +1289,7 @@ static Element render_status_bar(const AppState& state) {
     });
 }
 
-// 鈹€鈹€ File List View (3.3) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── File List View (3.3) ──────────────────────────────────────
 
 static Element render_file_view(AppState& state) {
     auto statuses = FileTracker::get_all_status(state.repo);
@@ -1342,7 +1325,7 @@ static Element render_file_view(AppState& state) {
     });
 }
 
-// 鈹€鈹€ File Browser helpers 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── File Browser helpers ──────────────────────────────────────
 
 static void refresh_browse(AppState& state) {
     state.browse_entries.clear();
@@ -1412,7 +1395,7 @@ static Element render_file_browser(const AppState& state) {
     });
 }
 
-// 鈹€鈹€ Commit Dialog (3.4) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Commit Dialog (3.4) ───────────────────────────────────────
 
 static Element render_commit_dialog(const AppState& state) {
     return vbox({
@@ -1427,7 +1410,7 @@ static Element render_commit_dialog(const AppState& state) {
     }) | border | center;
 }
 
-// 鈹€鈹€ Branch Create Dialog (3.5a) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Branch Create Dialog (3.5a) ───────────────────────────────
 
 static Element render_branch_create(const AppState& state) {
     std::string from = state.branch_from_commit.empty()
@@ -1444,7 +1427,7 @@ static Element render_branch_create(const AppState& state) {
 }
 
 
-// 鈹€鈹€ Help View 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Help View ─────────────────────────────────────────────────
 
 static Element render_help() {
     return vbox({
@@ -1463,7 +1446,7 @@ static Element render_help() {
     }) | border | center;
 }
 
-// 鈹€鈹€ Tree View (4.2) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Tree View (4.2) ────────────────────────────────────────
 
 static Element render_tree(AppState& state) {
     auto& tree = state.tree;
@@ -1560,7 +1543,7 @@ static Element render_tree(AppState& state) {
     });
 }
 
-// 鈹€鈹€ Main View 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Main View ─────────────────────────────────────────────────
 
 static Element render_main(AppState& state) {
     bool has_save = SaveManager::exists(state.repo);
@@ -1637,7 +1620,7 @@ static Element render_main(AppState& state) {
     return vbox(rows);
 }
 
-// 鈹€鈹€ run_app (3.1) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── run_app (3.1) ─────────────────────────────────────────────
 
 int run_app(const fs::path& repo_path) {
     AppState state;
@@ -1672,7 +1655,7 @@ int run_app(const fs::path& repo_path) {
     });
 
     auto main_component = CatchEvent(main_renderer, [&](Event event) {
-        // 鈹€鈹€ Global: Quit 鈹€鈹€
+        // ── Global: Quit ──
         if (state.view == ViewMode::Main) {
             if (event == Event::Character('q') || event == Event::Character('Q')) {
                 screen.Exit();
@@ -1680,7 +1663,7 @@ int run_app(const fs::path& repo_path) {
             }
         }
 
-        // 鈹€鈹€ Escape: back to main 鈹€鈹€
+        // ── Escape: back to main ──
         if (event == Event::Escape) {
             state.view = ViewMode::Main;
             state.commit_msg.clear();
@@ -1688,7 +1671,7 @@ int run_app(const fs::path& repo_path) {
             return true;
         }
 
-        // 鈹€鈹€ Commit Dialog input 鈹€鈹€
+        // ── Commit Dialog input ──
         if (state.view == ViewMode::CommitDialog) {
             if (event == Event::Return) {
                 if (!state.commit_msg.empty()) {
@@ -1716,7 +1699,7 @@ int run_app(const fs::path& repo_path) {
             return false;
         }
 
-        // 鈹€鈹€ Branch Create input 鈹€鈹€
+        // ── Branch Create input ──
         if (state.view == ViewMode::BranchCreate) {
             if (event == Event::Return) {
                 if (!state.branch_name.empty()) {
@@ -1752,7 +1735,7 @@ int run_app(const fs::path& repo_path) {
         }
 
 
-        // 鈹€鈹€ File Browser 鈹€鈹€
+        // ── File Browser ──
         if (state.view == ViewMode::FileBrowser) {
             if (event == Event::ArrowUp) {
                 if (state.browse_cursor > 0) state.browse_cursor--;
@@ -1811,7 +1794,7 @@ int run_app(const fs::path& repo_path) {
             return false;
         }
 
-        // 鈹€鈹€ Tree View navigation (4.3 + 4.4) 鈹€鈹€
+        // ── Tree View navigation (4.3 + 4.4) ──
         if (state.view == ViewMode::Tree) {
             auto& tree = state.tree;
             if (event == Event::ArrowUp) {
@@ -1894,7 +1877,7 @@ int run_app(const fs::path& repo_path) {
             return false;
         }
 
-        // 鈹€鈹€ File View navigation 鈹€鈹€
+        // ── File View navigation ──
         if (state.view == ViewMode::Files) {
             auto tracked = FileTracker::list(state.repo);
             if (event == Event::ArrowUp) {
@@ -1928,7 +1911,7 @@ int run_app(const fs::path& repo_path) {
             return false;
         }
 
-        // 鈹€鈹€ Main view shortcuts 鈹€鈹€
+        // ── Main view shortcuts ──
         if (event == Event::Character('f') || event == Event::Character('F')) {
             state.view = ViewMode::Files;
             state.file_selected = 0;
@@ -1982,7 +1965,6 @@ int run_app(const fs::path& repo_path) {
 
 } // namespace minigit
 
-
 // ============================================================
 // FILE 19 : src\tui\tree_view.cpp
 // ============================================================
@@ -1997,7 +1979,7 @@ namespace minigit {
 
 namespace fs = std::filesystem;
 
-// 鈹€鈹€ build (4.1) 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── build (4.1) ───────────────────────────────────────────────
 
 TreeData TreeData::build(const Repository& repo) {
     TreeData data;
@@ -2063,7 +2045,7 @@ TreeData TreeData::build(const Repository& repo) {
     return data;
 }
 
-// 鈹€鈹€ selected_node 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── selected_node ─────────────────────────────────────────────
 
 const TreeNode* TreeData::selected_node() const {
     if (columns.empty()) return nullptr;
@@ -2074,7 +2056,6 @@ const TreeNode* TreeData::selected_node() const {
 }
 
 } // namespace minigit
-
 
 // ============================================================
 // FILE 20 : src\utils\path_utils.cpp
@@ -2122,7 +2103,6 @@ fs::path find_minigit_root(const fs::path& working_dir) {
 }
 
 } // namespace minigit
-
 
 // ============================================================
 // FILE 21 : src\utils\time_utils.cpp
