@@ -25,3 +25,7 @@ DEVPLAN.md
 # Generated/utility files
 all_source.cpp
 gen_pdf.py
+
+# Personal journal (not for repo)
+Learning_Journey.md
+Learning_Journey_EN.md

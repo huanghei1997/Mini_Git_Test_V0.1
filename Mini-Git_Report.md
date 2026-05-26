@@ -47,8 +47,7 @@ cmake --build .
 # Run TUI
 ./mini-git
 
-# Run tests
-./mini-git --test
+# The program auto-creates/loads .minigit/ in the current directory
 ```
 
 ---
@@ -96,7 +95,7 @@ cmake --build .
 │       ├── path_utils.h        # Path normalization/encoding
 │       └── time_utils.h        # Timestamp utilities
 ├── src/
-│   ├── main.cpp                # Entry point + integration tests
+│   ├── main.cpp                # Entry point
 │   ├── core/                   # Backend implementation
 │   └── tui/                    # TUI implementation
 └── .gitignore
@@ -144,20 +143,17 @@ Data is stored in `.minigit/` under the project root:
 
 ---
 
-## Testing
+## Source Code
 
-The project includes comprehensive tests covering all phases:
-
-- **Phase 1 tests** — Path utils, repository init, file tracking, commits, branches
-- **Phase 2 tests** — Save create/restore/promote
-- **E2E integration** — Full workflow: track → commit → branch → switch → save → restore → promote → checkout → untrack
-
-All tests pass via `./mini-git --test`.
+Complete source code (21 files, ~2,022 lines) is available in:
+- **GitHub**: https://github.com/huanghei1997/Mini_Git_Test_V0.1
+- **Archive**: `all_source.cpp` (single-file reading copy)
 
 ---
 
-## Source Code
+## References
 
-Complete source code (27 files, ~2700 lines) is available in:
-- **GitHub**: https://github.com/huanghei1997/Mini_Git_Test_V0.1
-- **Archive**: `all_source.cpp` (single-file reading copy)
+- **FTXUI** (v5.0.0) — Terminal UI library for C++. https://github.com/ArthurSonzogni/FTXUI
+- **nlohmann/json** (v3.11.3) — JSON for Modern C++. https://github.com/nlohmann/json
+- **C++17 `<filesystem>`** — Standard library for cross-platform file operations. https://en.cppreference.com/w/cpp/filesystem
+- **CMake FetchContent** — Automatic dependency management. https://cmake.org/cmake/help/latest/module/FetchContent.html
